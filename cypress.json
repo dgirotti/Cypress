@@ -1,0 +1,6 @@
+{
+   
+    "baseUrl"               : "https://www.evbqa.com/signin/",
+    "defaultCommandTimeout" : 2000
+    
+}
