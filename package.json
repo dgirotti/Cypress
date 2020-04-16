@@ -8,7 +8,7 @@
     "test": "cypress run"
   },
   "keywords": [],
-  "author": "",
+  "author": "Diego Girotti",
   "license": "ISC",
   "dependencies": {
     "cypress": "^3.8.3"
