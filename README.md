@@ -1,3 +1,3 @@
 # Cypress-tests
 
-Test to run in evbqa 
+Tests in cypress to automate E2E flows in evbqa 
