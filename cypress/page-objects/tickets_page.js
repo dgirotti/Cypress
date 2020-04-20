@@ -1,52 +1,7 @@
 /// <reference types="cypress" />
 
 import listingPageSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/listing-page";
-
-// COMPLETE BASIC INFO PAGE
-
-export function complete_basic_info_page(EVENT_NAME){
- 
-    cy.url().should('include', 'manage/events/create');
-    cy.get('#musicBasicInfo-title').clear().type(EVENT_NAME).invoke('attr', 'value').should('contain', EVENT_NAME);
-    cy.wait(1000)
-    cy.get('#BasicInfo-venue').contains('option', 'Testing Venue');
-
-    
-    const EVENT_DATE = Cypress.moment().add(10, 'days').add(1, 'month').format('MM/DD/YYYY');
-
-    cy.get('#musicBasicInfo-startDate')
-        .invoke('attr', 'value')
-        .should('contain', EVENT_DATE);
-    
-    //save form
-    cy.get('[data-spec="event-page-action-save"]')
-    .contains('Save & Continue')
-    .click();
-
-}
-
-// COMPLETE DETAILS PAGE
-
-export function details_page(){
-
-   cy.url().should('include', '/details');
-
-   cy.get('.eds-image-uploader')
-       .should('exist');
-
-   const SUMMARY_TEXT = 'Summary For this event';
-
-   cy.get('[data-automation="coyote-design-event-summary-wrapper"]')
-       .should('exist')
-       .get('#event-design-description')
-       .type(SUMMARY_TEXT)
-       .contains(SUMMARY_TEXT);
-       
-   // save form
-   cy.get('[data-spec="event-page-action-save"]')
-       .contains('Save & Continue')
-       .click();
-}
+import commonEventCreationSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/create";
 
 // DIFFERENT TICKETS CREATION (GA - GA-HOLD - EXTERNAL TICKETING)
 
@@ -98,10 +53,10 @@ export function create_ticket_form(){
            .get('[data-automation="coyote-ticket-form-action-save"]')
            .as('ticketSubmitButton');
 
-        cy.get('@createTicketContent')
+       /* cy.get('@createTicketContent')
            .should('exist')
            .find('.segmented-control-label--checked')
-           .contains('Paid')
+           .contains('Paid')*/
 
        const GA_TICKET_DEFAULT_TITLE = 'General Admission';
        const GA_TICKET_NEW_TITLE = 'VIP';
@@ -110,9 +65,9 @@ export function create_ticket_form(){
            .get('[data-automation="coyote-ticketform-title"]')
            .as('ticketTitleInput');
 
-       cy.get('@ticketTitleInput')
+      /* cy.get('@ticketTitleInput')
            .invoke('attr', 'value')
-           .should('contain', GA_TICKET_DEFAULT_TITLE);
+           .should('contain', GA_TICKET_DEFAULT_TITLE);*/
 
        cy.get('@ticketTitleInput')
            .clear()
@@ -127,14 +82,19 @@ export function create_ticket_form(){
            .invoke('attr', 'value')
            .should('contain', '200');
 
-       cy.get('@createTicketContent')
+        cy.get('@createTicketContent')
            .get('[data-automation="coyote-ticketform-price"]')
            .clear()
            .type('10')
            .invoke('attr', 'value')
            .should('contain', '10');
 
-       cy.get('@ticketSubmitButton')
+        cy.get('#country-currency-link').click();
+
+        country_currency();
+        cy.wait(6000);
+       
+        cy.get('@ticketSubmitButton')
            .get('[data-automation="coyote-ticket-form-action-save"]')
            .contains('Save')
            .click();
@@ -147,8 +107,9 @@ export function country_currency(){
     
     cy.wait(6000);
 
-      //cy.get('dialog')
-        //.should('exist')
+     /* cy.get('.eds-modal__container')
+        .should('exist'))
+
            cy.get('.eds-modal__content__children')
            .should('exist')
            .as('country&CurrencyModal');
@@ -170,8 +131,25 @@ export function country_currency(){
            .should('exist')
            .click();  
 
-} 
+} */
 
+    // COUNTRY AND CURRENCY MODAL
+    cy.get(commonEventCreationSelectors.edsModal).should('exist');
+
+    cy.get(commonEventCreationSelectors.checkoutSettingsCountry).should(
+        'contain',
+        'United States',
+    );
+
+    cy.get(commonEventCreationSelectors.checkoutSettingsCurrency).should(
+        'contain',
+        'USD',
+    );
+
+    cy.get(commonEventCreationSelectors.checkoutSettingsPrimaryButton)
+        .should('exist')
+        .click();
+}
 
 // EXTERNAL TICKETING TICKETS
 
@@ -239,7 +217,6 @@ export function create_ga_holds_tickets(){
     cy.get('.add-ticket-type__container > .eds-btn--button').click();
 
     create_ticket_form() 
-    //country_currency()  
 
     cy.url().should('include', '/tickets');
 
@@ -354,193 +331,3 @@ export function hidden_ticket(){
            .contains('Save')
            .click();
 }   
-    
-// PUBLISH THE EVENT
-
-export function publish_event(){
-      
-        cy.wait(10000);
-        cy.contains('Publish Event').trigger('mouseover');
-        cy.contains('Publish Now').click();
-        
-}
-
-// CLOSE FACEBOK POP UP  
-
-export function close_publish_popup(){
-
-    cy.wait(5000);
-    cy.get('.eds-modal__container')  //data-spec="eds-modal__main"
-            .should('exist')    
-            .get('.eds-modal__content__children')
-            .should('exist')
-            .as('Congratulations');
-
-    cy.get('@Congratulations')
-    .get('[data-automation="modal-close-button"]').as('close');
-    cy.get('@close').should('exist').click();
-    cy.wait(2000);
-}  
-
-// NAVIGATE TO EVENTS PAGE
-export function swith_to_event_page(){
-
-    cy.wait(2000);
-    cy.contains('Switch Event').click();
-    cy.url().should('include', '/organizations/events');
-    
-}
-
-// CLOSE CONGRATULATION POP UP  
-
-/*export function close_et_publish_popup(){
-
-    cy.wait(5000);
-    cy.get('.eds-modal__container')  //data-spec="eds-modal__main"
-            .should('exist')    
-            .get('.eds-modal__content__children')
-            .should('exist')
-            .as('Congratulations');
-
-    cy.get('@Congratulations')
-    .get('[data-automation="modal-close-button"]').as('close');
-    cy.get('@close').should('exist').click();
-    cy.wait(2000);
-    
-
-    //cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'On Sale');
-     
-
-}*/
-
-//CHANGE EVENT STATUS TO CANCELED
-
-export function change_status_to_canceled(){
-
-    cy.wait(2000);
-    cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'On Sale');
-    cy.contains('On Sale').trigger('mouseover');
-    cy.contains('Change Status').click();
-    cy.wait(3000);
-    cy.get('#statusCode').select('Canceled');
-    cy.contains('Take Off Sale').click();
-    cy.wait(3000); 
-    cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'Canceled');
-}
-
-//CHANGE EVENT STATUS TO POSTPONED
-
-export function change_status_to_postponed(){
-
-    cy.wait(2000);
-    cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'On Sale');
-    cy.contains('On Sale').trigger('mouseover');
-    cy.contains('Change Status').click();
-    cy.wait(3000);
-    cy.get('#statusCode').select('Postponed');
-    cy.contains('Take Off Sale').click();
-    cy.wait(3000); 
-    cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'Postponed');
-}
-
-
-// LOG OUT OF EVBQA.COM
-
-export function logout(USER_NAME){
-
-    cy.contains(USER_NAME).trigger('mouseover');//Selecciona en el header para mostrar las opciones del log out
-
-    cy.contains("Log out").click();
-
-    cy.url().should('include', '/signin');
- 
-}
-
-
-// LISTING PAGE OF THE EVENT
-
-export function listing_page(){
-    cy.location().then((location) => {
-        const eventId = location.pathname.match(new RegExp('/events/(.*)/tickets'))[1];
-        publish_event();
-        close_publish_popup();
-        cy.visit(`/e/${eventId}`);
-        
-    })
-}
-
-// LISTING PAGE OF CANCELED EVENT
-
-export function canceled_listing_page(){
-    cy.location().then((location) => {
-        const eventId = location.pathname.match(new RegExp('/events/(.*)/tickets'))[1];
-        publish_event();
-        close_publish_popup();
-        change_status_to_canceled();
-        cy.wait(2000);
-        cy.visit(`/e/${eventId}`);
-        
-    })
-}
-
-// LISTING PAGE OF POSTPONED EVENT
-
-export function postponed_listing_page(){
-    cy.location().then((location) => {
-        const eventId = location.pathname.match(new RegExp('/events/(.*)/tickets'))[1];
-        publish_event();
-        close_publish_popup();
-        change_status_to_postponed();
-        cy.wait(2000);
-        cy.visit(`/e/${eventId}`);
-        
-    })
-}
-
-// LISTING PAGE OF UNAVAILABLE EVENT
-
-export function unavailable_listing_page(){
-    cy.location().then((location) => {
-        const eventId = location.pathname.match(new RegExp('/events/(.*)/tickets'))[1];
-        publish_event();
-        close_publish_popup();
-        cy.wait(2000);
-        cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'Unavailable');
-        cy.visit(`/e/${eventId}`);
-        
-    })
-}
-
-
-   
-// VERIFY THAT DATA IS DISPLAYED PROPERLY ON LISTING PAGE
-    
-export function listing_validations(EVENT_NAME){
-
-        cy.get(listingPageSelectors.externalTicketButton).should('contain', 'Tickets');
-        cy.get(listingPageSelectors.eventMusicProps)
-        .should('contain', EVENT_NAME)
-        .should('contain', 'ALL AGES');
-        
-
-}
-
-export function listing_canceled_verification(){
-
-    cy.get(listingPageSelectors.externalTicketButton).should('contain', 'Details');
-    cy.get(listingPageSelectors.eventlistingstatus).should('contain', 'Canceled');
-
-}
-
-export function listing_postponed_verification(){
-
-    cy.get(listingPageSelectors.externalTicketButton).should('contain', 'Details');
-    cy.get(listingPageSelectors.eventlistingstatus).should('contain', 'Postponed');
-
-}
-
-export function listing_unavailable_verification(){
-
-    cy.get(listingPageSelectors.eventlistingstatus).should('contain', 'Unavailable');
-
-}

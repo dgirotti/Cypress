@@ -1,17 +1,33 @@
 /// <reference types="cypress" />
 
 import { 
-	navigate,
+    navigate,
     login_music_user,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/login_page";
+
+import{
     create_event,
-    complete_basic_info_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/create_event_page";
+
+import{
+     complete_basic_info_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/basic_info_page";
+    
+import{
     details_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/details_page";
+    
+import{ 
     create_ga_holds_tickets,
-    create_hold_ticket
-    //publish_event,
-    //close_publish_popup,
-	//logout
-} from "/Users/dgirotti/E2E_tests/cypress/page-objects/eventbrite-page";
+    create_hold_ticket,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/tickets_page";
+
+import{
+    publish_event,
+    close_publish_popup,
+    logout
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/header_menu_page";
+
 
 import{
     USER_EMAIL,
@@ -21,6 +37,8 @@ import{
 }from "/Users/dgirotti/E2E_tests/cypress/evb-constants/constants";
 
 describe('Create a GA Hold Event', () =>{
+
+    // before bloque va aca. 
 
     it('Should create a GA HOLD Ticket ', () =>{
 
@@ -37,8 +55,8 @@ describe('Create a GA Hold Event', () =>{
     create_ga_holds_tickets()
     cy.wait(5000);
     create_hold_ticket()
-    //publish_event()
-    //close_publish_popup()
-    //logout(USER_NAME)
+    publish_event()
+    close_publish_popup()
+    logout(USER_NAME)
     })
 })

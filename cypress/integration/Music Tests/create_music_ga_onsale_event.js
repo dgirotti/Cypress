@@ -1,19 +1,36 @@
 /// <reference types="cypress" />
 
 import { 
-	navigate,
+    navigate,
     login_music_user,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/login_page";
+
+import{
     create_event,
-    complete_basic_info_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/create_event_page";
+
+import{
+     complete_basic_info_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/basic_info_page";
+    
+import{
     details_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/details_page";
+
+import{ 
     create_ga_tickets,
     create_ticket_form,
-    country_currency,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/tickets_page";
+
+import{
     publish_event,
     close_publish_popup,
-	logout
+    logout
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/header_menu_page";
 
- } from "/Users/dgirotti/E2E_tests/cypress/page-objects/eventbrite-page";
+import{ 
+    swith_to_event_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/left_menu_page";
 
 import{
     USER_EMAIL,
@@ -39,9 +56,9 @@ describe('Create GA On Sale Event under Music Organization', () =>{
         cy.wait(5000);
         create_ga_tickets()
         create_ticket_form()
-        country_currency()
         publish_event()
         close_publish_popup()
+        swith_to_event_page()
         logout(USER_NAME) 
 	})	
 

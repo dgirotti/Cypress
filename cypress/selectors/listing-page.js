@@ -9,6 +9,8 @@ const domSelectors = {
     eventMusicProps: '[data-automation="event-music-properties"]',
     performersList: '[data-automation="artist-list"]',
     externalTicketButton: '.micro-ticket-box__btn',
+    eventlistingstatus:'[data-automation="micro-ticket-box-status"]',
+
 };
 
 export default domSelectors;    

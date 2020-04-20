@@ -1,15 +1,30 @@
 /// <reference types="cypress" />
 
 import { 
-	navigate,
+    navigate,
     login_music_user,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/login_page";
+
+import{
     create_event,
-    complete_basic_info_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/create_event_page";
+
+import{
+     complete_basic_info_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/basic_info_page";
+    
+import{
     details_page,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/details_page";
+    
+import{ 
     create_et_tickets,
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/tickets_page";
+
+import{ 
     listing_page,
-    listing_validations
-} from "/Users/dgirotti/E2E_tests/cypress/page-objects/eventbrite-page";
+    listing_validations,
+} from "/Users/dgirotti/E2E_tests/cypress/page-objects/listing_page";
 
 import{
     USER_EMAIL,
