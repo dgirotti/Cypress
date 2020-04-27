@@ -20,6 +20,7 @@ import{
 import{ 
     create_ga_tickets,
     create_ticket_form,
+    save_ticket_form,
 }from "/Users/dgirotti/E2E_tests/cypress/page-objects/tickets_page";
 
 import{
@@ -56,6 +57,7 @@ describe('Create GA On Sale Event under Music Organization', () =>{
         cy.wait(5000);
         create_ga_tickets()
         create_ticket_form()
+        save_ticket_form()
         publish_event()
         close_publish_popup()
         swith_to_event_page()

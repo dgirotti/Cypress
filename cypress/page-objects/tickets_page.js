@@ -10,6 +10,7 @@ import commonEventCreationSelectors from "/Users/dgirotti/E2E_tests/cypress/sele
 export function create_ga_tickets(){
 
     cy.url().should('include', '/tickets');
+    cy.compareSnapshot("tickets");
 
     cy.contains('General Admission').trigger('mouseover');
     cy.contains('Create Tickets').click();
@@ -94,44 +95,25 @@ export function create_ticket_form(){
         country_currency();
         cy.wait(6000);
        
-        cy.get('@ticketSubmitButton')
+        /*cy.get('@ticketSubmitButton')
            .get('[data-automation="coyote-ticket-form-action-save"]')
            .contains('Save')
-           .click();
+           .click();*/
 }   
 
+export function save_ticket_form(){
+
+    cy.get('@ticketSubmitButton')
+    .get('[data-automation="coyote-ticket-form-action-save"]')
+    .contains('Save')
+    .click();
+}
 
 // COUNTRY AND CURRENCY MODAL
 
 export function country_currency(){
     
     cy.wait(6000);
-
-     /* cy.get('.eds-modal__container')
-        .should('exist'))
-
-           cy.get('.eds-modal__content__children')
-           .should('exist')
-           .as('country&CurrencyModal');
-
-       cy.get('@country&CurrencyModal')
-           .get('[data-spec="checkout-settings-country-select"]').as('countryInput')
-           .get('[data-spec="checkout-settings-currency-select"]').as('currencyInput')
-           .get('[data-automation="eds-modal__primary-button"]').as('continueButton');
-
-    cy.wait(6000);
-
-       cy.get('@countryInput')
-           .should('exist');
-
-       cy.get('@currencyInput')
-           .should('exist');
-
-       cy.get('@continueButton')
-           .should('exist')
-           .click();  
-
-} */
 
     // COUNTRY AND CURRENCY MODAL
     cy.get(commonEventCreationSelectors.edsModal).should('exist');
@@ -160,6 +142,7 @@ export function create_et_tickets(){
     const url_link = 'https://www.eventbrite.com'
 
     cy.url().should('include', '/tickets');
+    cy.compareSnapshot("tickets");
     cy.contains('External Ticketing').trigger('mouseover');
     cy.contains('Setup External Link').click();
     cy.wait(5000)
@@ -182,6 +165,7 @@ export function create_et_tickets(){
 export function create_ga_holds_tickets(){
 
     cy.url().should('include', '/tickets');
+    cy.compareSnapshot("tickets");
     cy.contains('General Admission').trigger('mouseover');
     cy.contains('Create Tickets').click();
     cy.wait(5000)
@@ -219,6 +203,7 @@ export function create_ga_holds_tickets(){
     create_ticket_form() 
 
     cy.url().should('include', '/tickets');
+    save_ticket_form()
 
 }
 
@@ -266,68 +251,18 @@ export function create_hold_ticket(){
 export function hidden_ticket(){
 
     create_ga_tickets()
-
-    cy.url().should('include', '/tickets/create');
-
-       cy.get('[data-spec="eds-structure-drawer-right"]')
-           .should('exist');
-
-       cy.get('[data-spec="eds-structure-drawer-header"]').as('createTicketHeader')
-       cy.get('.eds-structure__drawer-content').as('createTicketContent')
-       cy.get('.eds-fixed-bottom-bar-layout__bar').as('createTicketFooter');
-
-       const ADD_TICKET_TEXT = 'Add Ticket';
-
-       cy.get('@createTicketHeader')
-           .should('exist')
-           .get('[data-spec="eds-structure-drawer-title"]')
-           .contains(ADD_TICKET_TEXT);
-
-       cy.get('@createTicketFooter')
-           .should('exist')
-           .get('[data-automation="coyote-ticket-form-action-save"]')
-           .as('ticketSubmitButton');
-
-       /*cy.get('@createTicketContent')
-           .should('exist')
-           .find('.segmented-control-label--checked')
-           .contains('Paid')*/
-
-       const GA_TICKET_DEFAULT_TITLE = 'General Admission';
-       const GA_TICKET_NEW_TITLE = 'VIP';
-
-       cy.get('@createTicketContent')
-           .get('[data-automation="coyote-ticketform-title"]')
-           .as('ticketTitleInput');
-
-       cy.get('@ticketTitleInput')
-           .invoke('attr', 'value')
-           .should('contain', GA_TICKET_DEFAULT_TITLE);
-
-       cy.get('@ticketTitleInput')
-           .clear()
-           .type(GA_TICKET_NEW_TITLE)
-           .invoke('attr', 'value')
-           .should('contain', GA_TICKET_NEW_TITLE);
-
-       cy.get('@createTicketContent')
-           .get('[data-automation="coyote-ticketform-quantity"]')
-           .clear()
-           .type('200')
-           .invoke('attr', 'value')
-           .should('contain', '200');
-
-       cy.get('@createTicketContent')
-           .get('[data-automation="coyote-ticketform-price"]')
-           .clear()
-           .type('10')
-           .invoke('attr', 'value')
-           .should('contain', '10');
-
-        cy.get(':nth-child(3) > .eds-field-styled__border-simulation > .eds-field-styled__internal > .eds-field-styled__input-container > .eds-field-styled__select-wrapper > .eds-field-styled__input').select('Hidden')
-        
-        cy.get('@ticketSubmitButton')
-           .get('[data-automation="coyote-ticket-form-action-save"]')
-           .contains('Save')
-           .click();
+    create_ticket_form()
+    cy.get(':nth-child(3) > .eds-field-styled__border-simulation > .eds-field-styled__internal > .eds-field-styled__input-container > .eds-field-styled__select-wrapper > .eds-field-styled__input').select('Hidden')
+    save_ticket_form()
 }   
+
+/*export function payment_constraints(){
+
+    create_ga_tickets()
+    create_ticket_form()
+    //seleccionar pc option
+    //seleccinar la tj deseada
+    save_ticket_form()
+    
+
+}*/

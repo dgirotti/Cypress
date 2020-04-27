@@ -8,6 +8,7 @@ import listingPageSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/li
 export function details_page(){
 
     cy.url().should('include', '/details');
+    cy.compareSnapshot("details");
  
     cy.get('.eds-image-uploader')
         .should('exist');

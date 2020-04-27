@@ -52,7 +52,8 @@ export function unavailable_listing_page(){
         publish_event();
         close_publish_popup();
         cy.wait(2000);
-        cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'Unavailable');
+        //cy.get(':nth-child(1) > :nth-child(1) > document-fragment > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents').should('have.text', 'Unavailable');
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(1) > .eds-dropdown-menu > .eds-dropdown-menu__link > .eds-dropdown-menu__contents > .eds-global-header__menu-label').should('have.text', 'Unavailable');
         cy.visit(`/e/${eventId}`);
         
     })

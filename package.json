@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "cypress": "cypress open",
-    "test": "cypress run"
+    "test": "node_modules\\.bin\\cypress run",
+    "recordDashboardTest": "cypress run --record --key a225b386-026b-41b6-b07e-add8a29cd892",
+    "MusicTests": "npm run test -- -- spec \"cypress/integration/Music Test/*\""
   },
   "keywords": [],
   "author": "Diego Girotti",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^3.8.3"
+    "cypress": "^4.4.1"
+  },
+  "devDependencies": {
+    "cypress-visual-regression": "^1.2.0"
   }
 }

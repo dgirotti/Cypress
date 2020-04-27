@@ -7,7 +7,6 @@ import listingPageSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/li
 
 export function create_event(){
 
-    cy.viewport('macbook-15')
     cy.wait(2000)
     cy.contains('Create Event').click()
     
