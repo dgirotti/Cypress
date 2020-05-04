@@ -7,3 +7,5 @@
         export const EVENT_TITLE = 'Cypress Automation Test '
         export const EVENT_NAME = EVENT_TITLE + EVENT_TITLE_DATE;
        
+
+      

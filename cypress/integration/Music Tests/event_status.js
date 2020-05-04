@@ -10,7 +10,7 @@ import {
 } from "/Users/dgirotti/E2E_tests/cypress/page-objects/create_event_page";
 
 import {
-    complete_basic_info_page,
+    complete_music_basic_info_page,
 } from "/Users/dgirotti/E2E_tests/cypress/page-objects/basic_info_page";
 
 import {
@@ -19,7 +19,7 @@ import {
 
 import {
     create_ga_tickets,
-    create_ticket_form,
+    create_music_ticket_form,
     hidden_ticket,
     save_ticket_form,
 } from "/Users/dgirotti/E2E_tests/cypress/page-objects/tickets_page";
@@ -53,7 +53,7 @@ describe('Manage Differents Event Status Events', () => {
         cy.wait(1000);
         create_event()
         cy.wait(5000);
-        complete_basic_info_page(EVENT_NAME)
+        complete_music_basic_info_page(EVENT_NAME)
         cy.wait(8000)
         details_page()
         cy.wait(5000);
@@ -63,7 +63,7 @@ describe('Manage Differents Event Status Events', () => {
     it('Should click on Change Status and set it as Canceled', () => {
 
         create_ga_tickets()
-        create_ticket_form()
+        create_music_ticket_form()
         save_ticket_form()
         canceled_listing_page()
         listing_canceled_verification()
@@ -73,7 +73,7 @@ describe('Manage Differents Event Status Events', () => {
     it('Should click on Change Status and set it as Postponed', () => {
 
         create_ga_tickets()
-        create_ticket_form()
+        create_music_ticket_form()
         save_ticket_form()
         postponed_listing_page()
         listing_postponed_verification()

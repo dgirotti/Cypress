@@ -5,7 +5,7 @@ import commonEventCreationSelectors from "/Users/dgirotti/E2E_tests/cypress/sele
 
 // DIFFERENT TICKETS CREATION (GA - GA-HOLD - EXTERNAL TICKETING)
 
-// GA TICKETS
+// GA TICKETS FOR MUSIC
 
 export function create_ga_tickets(){
 
@@ -29,9 +29,29 @@ export function create_ga_tickets(){
         .click({force: true});
 }
  
+// CREATE TICKETS FOR NON MUSIC ACCOUNTS
+
+export function create_tickets(){
+
+    cy.url().should('include', '/tickets');
+    cy.compareSnapshot("tickets");
+    
+    const TICKETS_EMPTY_STATE_TEXT = "Let's create tickets";
+    const CREATE_TICKET_BUTTON = 'Create Ticket';
+
+    cy.get('.eds-empty-state__title')
+        .should('exist')
+        .contains(TICKETS_EMPTY_STATE_TEXT);
+
+    cy.get('button')
+        .contains(CREATE_TICKET_BUTTON)
+        .click({force: true});
+    
+}
+
 // COMPLETE TICKET FORM
 
-export function create_ticket_form(){
+export function create_music_ticket_form(){
 
        cy.url().should('include', '/tickets/create');
 
@@ -59,7 +79,7 @@ export function create_ticket_form(){
            .find('.segmented-control-label--checked')
            .contains('Paid')*/
 
-       const GA_TICKET_DEFAULT_TITLE = 'General Admission';
+       //const GA_TICKET_DEFAULT_TITLE = 'General Admission';
        const GA_TICKET_NEW_TITLE = 'VIP';
 
        cy.get('@createTicketContent')
@@ -99,6 +119,71 @@ export function create_ticket_form(){
            .get('[data-automation="coyote-ticket-form-action-save"]')
            .contains('Save')
            .click();*/
+}   
+
+export function create_ticket_form(){
+
+    cy.url().should('include', '/tickets/create');
+
+    cy.get('[data-spec="eds-structure-drawer-right"]')
+        .should('exist');
+
+    cy.get('[data-spec="eds-structure-drawer-header"]').as('createTicketHeader')
+    cy.get('.eds-structure__drawer-content').as('createTicketContent')
+    cy.get('.eds-fixed-bottom-bar-layout__bar').as('createTicketFooter');
+
+    const ADD_TICKET_TEXT = 'Add Ticket';
+
+    cy.get('@createTicketHeader')
+        .should('exist')
+        .get('[data-spec="eds-structure-drawer-title"]')
+        .contains(ADD_TICKET_TEXT);
+
+    cy.get('@createTicketFooter')
+        .should('exist')
+        .get('[data-automation="coyote-ticket-form-action-save"]')
+        .as('ticketSubmitButton');
+
+    /* cy.get('@createTicketContent')
+        .should('exist')
+        .find('.segmented-control-label--checked')
+        .contains('Paid')*/
+
+    //const GA_TICKET_DEFAULT_TITLE = 'General Admission';
+    const GA_TICKET_NEW_TITLE = 'VIP';
+
+    cy.get('@createTicketContent')
+        .get('[data-automation="coyote-ticketform-title"]')
+        .as('ticketTitleInput');
+
+   /* cy.get('@ticketTitleInput')
+        .invoke('attr', 'value')
+        .should('contain', GA_TICKET_DEFAULT_TITLE);*/
+
+    cy.get('@ticketTitleInput')
+        .clear()
+        .type(GA_TICKET_NEW_TITLE)
+        .invoke('attr', 'value')
+        .should('contain', GA_TICKET_NEW_TITLE);
+
+    cy.get('@createTicketContent')
+        .get('[data-automation="coyote-ticketform-quantity"]')
+        .clear()
+        .type('200')
+        .invoke('attr', 'value')
+        .should('contain', '200');
+
+     cy.get('@createTicketContent')
+        .get('[data-automation="coyote-ticketform-price"]')
+        .clear()
+        .type('10')
+        .invoke('attr', 'value')
+        .should('contain', '10');
+
+     cy.get('@ticketSubmitButton')
+        .get('[data-automation="coyote-ticket-form-action-save"]')
+        .contains('Save')
+        .click();
 }   
 
 export function save_ticket_form(){

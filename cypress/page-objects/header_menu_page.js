@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-import listingPageSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/listing-page";
-
 // PUBLISH THE EVENT
 
 export function publish_event(){

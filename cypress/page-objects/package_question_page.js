@@ -20,6 +20,7 @@ export function complete_req_questions(EVENT_NAME) {
     cy.contains('Next').click();
     cy.wait(2000)
     cy.url().should('include', '/details');
+    cy.get('.eds-g-cell-sw-9-12 > span').should('contain',"You've unlocked our Professional Features!");
 
 }
 
@@ -49,6 +50,9 @@ export function package_questions_validations(EVENT_NAME) {
     cy.contains('Next').click();
     cy.wait(2000)
     cy.url().should('include', '/details');
+    cy.get('.eds-g-cell-sw-9-12 > span').should('contain',"You've unlocked our Professional Features!");
+    
+    
 }
 
 export function skip() {
@@ -85,6 +89,13 @@ export function back(EVENT_NAME) {
     cy.contains('Next').click();
     cy.wait(2000)
     cy.url().should('include', '/details');
+    cy.get('.eds-g-cell-sw-9-12 > span').should('contain',"You've unlocked our Professional Features!");
 
+
+}
+// Sin implementar. Ver el argumento target de la nueva pagina. 
+export function view_packages(){
+
+    cy.get('.eds-align--right > .eds-btn--link').click()
 
 }

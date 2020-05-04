@@ -42,9 +42,9 @@ describe('Complete packege question', () => {
         package_questions_validations(EVENT_NAME)
     })
 
-    it('Should skip the process and go to basic info page', () => {
+    /*it('Should skip the process and go to basic info page', () => {
         skip()
-    })
+    })*/
 
     it('Should skip the process and go to basic info page', () => {
         back(EVENT_NAME)

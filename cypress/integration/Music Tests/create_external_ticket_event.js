@@ -10,7 +10,7 @@ import{
 }from "/Users/dgirotti/E2E_tests/cypress/page-objects/create_event_page";
 
 import{
-     complete_basic_info_page,
+    complete_music_basic_info_page,
 }from "/Users/dgirotti/E2E_tests/cypress/page-objects/basic_info_page";
     
 import{
@@ -43,7 +43,7 @@ import{
         cy.wait(1000);
         create_event()
         cy.wait(5000);
-        complete_basic_info_page(EVENT_NAME)
+        complete_music_basic_info_page(EVENT_NAME)
         cy.wait(8000)
         details_page()
         cy.wait(5000);
