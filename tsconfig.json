@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
+        "target": "es5",
+        "module": "commonjs",
+        "lib": ["dom", "es2015"],
+        "jsx": "react",
+        "outDir": "./dist",
+        "noEmit": true,
+        "downlevelIteration": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "types": ["cypress", "@types/testing-library__cypress"]
+    },
+    "exclude": ["**/node_modules/**"],
+    "include": ["cypress"]
+}

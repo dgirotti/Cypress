@@ -1,12 +1,11 @@
 /// <reference types="cypress" />
 
-import listingPageSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/listing-page";
-
 // OPEN www.evbqa.com PAGE
 
 export function navigate() {
 	
     cy.visit('/signin') ;
+    cy.title().should('include', 'Eventbrite - Log In or Sign Up')
     cy.compareSnapshot("login");
     
 }

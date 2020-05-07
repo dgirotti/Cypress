@@ -27,18 +27,24 @@ import {
 import {
     create_tickets,
     create_ticket_form,
-    
+
 } from "/Users/dgirotti/E2E_tests/cypress/page-objects/tickets_page";
 
-import{
+import {
     publish_event,
     close_publish_popup,
-}from "/Users/dgirotti/E2E_tests/cypress/page-objects/header_menu_page";
+} from "/Users/dgirotti/E2E_tests/cypress/page-objects/header_menu_page";
+
+import {
+    postpone_event_banner,
+    cancel_event_banner,
+    online_event_banner,
+    cancel_remove
+} from "/Users/dgirotti/E2E_tests/cypress/page-objects/banner_status_page";
 
 import{
-    postpone_event_banner,
-    cancel_event_banner
-}from "/Users/dgirotti/E2E_tests/cypress/page-objects/banner_status_page";
+    click_on_ticket_button
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/checkout_page";
 
 
 describe('BAZZINGA Postpone and Cancel events using the banner flow', () => {
@@ -73,4 +79,15 @@ describe('BAZZINGA Postpone and Cancel events using the banner flow', () => {
 
     })
 
+    it('Should click on Change Status from Banner and set it as Canceled', () => {
+
+        online_event_banner()
+
+    })
+
+    it.only('Shoud display the pop up message ', ()=>{
+        click_on_ticket_button();
+        //LLAMAR A LA FUNCION QUE COMPRA EL TICKET DEL CHECKOUT
+        //cancel_remove()
+    })
 })
