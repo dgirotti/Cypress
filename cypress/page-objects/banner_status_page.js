@@ -18,8 +18,8 @@ export function postpone_event_banner() {
     cy.contains('Learn more').click();
     cy.url().should('include', 'shouldshowpublishbanner=1');
     //cy.get('.eds-structure__main > .eds-notification-bar--has-close > .eds-notification-bar__content > .eds-notification-bar__content-child').should('have.text', "Nice work, you've successfully postponed your event")
-    cy.reload();
-    close_publish_popup();
+    //cy.reload();
+    //close_publish_popup();
     cy.get(':nth-child(1) > :nth-child(1) > :nth-child(1) > .eds-dropdown-menu > .eds-dropdown-menu__link').should('have.text', 'Postponed');
     cy.compareSnapshot("afterpostdashboard");
 }
@@ -37,8 +37,8 @@ export function cancel_event_banner() {
     cy.get('.eds-notification-bar__content-child').should('be.visible').and('contain', "Listing updated as 'Canceled'")
     cy.contains('Mark as complete').click();
     //cy.get('.eds-structure__main > .eds-notification-bar--has-close > .eds-notification-bar__content > .eds-notification-bar__content-child').should('have.text', "Event successfully canceled")
-    cy.reload();
-    close_publish_popup();
+    //cy.reload();
+    //close_publish_popup();
     cy.get(':nth-child(1) > :nth-child(1) > :nth-child(1) > .eds-dropdown-menu > .eds-dropdown-menu__link').should('have.text', 'Canceled');
     cy.compareSnapshot("aftercanceldashboard");
 }

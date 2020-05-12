@@ -9,16 +9,20 @@ export function marketing_tool(){
         publish_event();
         close_publish_popup();
         //URL FOR ACCESING TO MARKETING TOOL
-        cy.visit(`/myevent/${eventId}/?janus_fv=exp_eb_134289_marketing_tool_paid_events=C`);
+        cy.visit(`/myevent/${eventId}/?janus_fv=exp_eb_141015_marketing_tool=B`);
 
         // MARKETING TOOL ON LEFT MENU
         cy.contains('Invite & Promote').click();
         cy.contains('Marketing Overview').click();
-        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(1) > .eds-text-bl').should('contain.text', 'Add to Facebook');
-        cy.get(':nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > .eds-text-bl').should('contain.text', 'Email Campaigns');
-        cy.get(':nth-child(2) > :nth-child(3) > :nth-child(1) > :nth-child(1) > .eds-text-bl').should('contain.text', 'Paid Social Ads');
-        cy.get(':nth-child(2) > :nth-child(4) > :nth-child(1) > :nth-child(1) > .eds-text-bl').should('contain.text', 'Website Integrations');
-
+        //MARKETING PAGE OVERVIEW
+        cy.get('h3').should('contain', 'Add to Facebook');
+        cy.get('h3').should('contain', 'Email Campaigns');
+        cy.get('h3').should('contain', 'Paid Social Ads');
+        cy.get('h3').should('contain', 'Website Integrations');
+        //CLICKING ON FACEBOOK SET UP AND GOING BACK. 
+        cy.get(':nth-child(1) > :nth-child(2) > :nth-child(1) > .eds-l-mar-left-1 > .eds-text-weight--heavy > .eds-link > .eds-l-mar-right-1').click();
+        cy.get('h1').should('contain', 'Add to facebook')
+        cy.get('.eds-breadcrumbs__item--link').click()
 
     })
 }

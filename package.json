@@ -18,7 +18,7 @@
   "author": "Diego Girotti",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^4.4.1",
+    "cypress": "^4.5.0",
     "prettier": "^2.0.5"
   },
   "devDependencies": {

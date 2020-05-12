@@ -16,8 +16,10 @@ module.exports = (on, config) => {
   // `config` is the resolved Cypress config
 }
 
+// @ts-ignore
 const getCompareSnapshotsPlugin = require('cypress-visual-regression/dist/plugin');
 
+// @ts-ignore
 module.export = (on) => {
 
   getCompareSnapshotsPlugin(on);

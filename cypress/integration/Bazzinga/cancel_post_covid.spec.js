@@ -44,7 +44,7 @@ import {
 
 import{
     click_on_ticket_button
-}from "/Users/dgirotti/E2E_tests/cypress/page-objects/checkout_page";
+}from "/Users/dgirotti/E2E_tests/cypress/page-objects/listing_page";
 
 
 describe('BAZZINGA Postpone and Cancel events using the banner flow', () => {

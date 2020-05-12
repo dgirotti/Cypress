@@ -1,17 +1,31 @@
 /// <reference types="cypress" />
 
-export function click_on_ticket_button() {
+import {
+    checkoutPage,
+    checkoutTicketsSelector,
+} from "/Users/dgirotti/E2E_tests/cypress/selectors/checkout";
 
 
-    cy.get('.eds-global-header__quick-link').invoke('removeAttr', 'target').click();
-    cy.wait(1000)
-    cy.get('.js-embed-ticket-modal-btn ').click();
-    cy.wait(10000)
-    
-    //cy.get('.eds-btn eds-btn--button eds-btn--fill').should('be.visible').click();
-    cy.get('[data-automation="eds-modal__primary-button"]').click();
-    //cy.contains('Checkout').click();
-    cy.wait(1000)
-    //cy.contains('Place Order').click();
-    //cy.go(back);
+export function checkout_modal() {
+
+    // FALTA COMPLETAR CON LAS TJ DE CREDITOS (VALIDA E INVALIDA)
+
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        // returning false here prevents Cypress from
+        // failing the test
+        return false
+    })
+
+    cy.get(checkoutPage.actionButton).should(
+        'not.have.attr',
+        'aria-disabled',
+        'true',
+    );
+    cy.get(checkoutPage.actionButton).click();
+    cy.get(checkoutPage.confirmationPage, { timeout: 30000 }).should('be.visible');
 }
+
+
+
+
+

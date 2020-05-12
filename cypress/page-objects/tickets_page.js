@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import listingPageSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/listing-page";
 import commonEventCreationSelectors from "/Users/dgirotti/E2E_tests/cypress/selectors/create";
 
 // DIFFERENT TICKETS CREATION (GA - GA-HOLD - EXTERNAL TICKETING)
@@ -10,6 +9,7 @@ import commonEventCreationSelectors from "/Users/dgirotti/E2E_tests/cypress/sele
 export function create_ga_tickets(){
 
     cy.url().should('include', '/tickets');
+    // @ts-ignore
     cy.compareSnapshot("tickets");
 
     cy.contains('General Admission').trigger('mouseover');
@@ -34,8 +34,6 @@ export function create_ga_tickets(){
 export function create_tickets(){
 
     cy.url().should('include', '/tickets');
-    cy.compareSnapshot("tickets");
-    
     const TICKETS_EMPTY_STATE_TEXT = "Let's create tickets";
     const CREATE_TICKET_BUTTON = 'Create Ticket';
 
@@ -341,13 +339,20 @@ export function hidden_ticket(){
     save_ticket_form()
 }   
 
-/*export function payment_constraints(){
+// SELECCIONA UN PC PARA EL TICKET
+export function payment_constraints(){
 
+    //llama a las funciones de tickets para crear un ticket GA.
     create_ga_tickets()
-    create_ticket_form()
-    //seleccionar pc option
-    //seleccinar la tj deseada
+    create_music_ticket_form()
+    //seleccionar pc option del combo
+    cy.get('.eds-g-cell > .eds-field-styled > .eds-field-styled__border-simulation > .eds-field-styled__internal > .eds-field-styled__input-container > .eds-field-styled__select-wrapper > .eds-field-styled__input').select('Credit Card')
+    //cy.get('.eds-field-styled__input').select('Credit Card')
+    //seleccinar Visa como tj deseada 
+    cy.contains('Mastercard').click();
+    cy.contains('American Express').click();
+    cy.contains('Discover').click();
+    //guarda el ticket con pc = visa.
     save_ticket_form()
     
-
-}*/
+}

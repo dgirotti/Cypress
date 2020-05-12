@@ -9,5 +9,7 @@
   "projectId": "n6ttxv",
   "screenshotsFolder": "cypress/snapshots/actual",
   "trashAssetsBeforerun": true,
-  "waitForAnimations": true
+  "waitForAnimations": true,
+  "chromeWebSecurity": false
+  
 }
