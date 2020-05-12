@@ -127,9 +127,16 @@ export function ticket_button_and_checkout() {
         cy.get('.js-embed-ticket-modal-btn ').click();
         cy.visit(`/checkout-external?eid=${eventId}`);
         cy.get('.eds-text-bs').should('contain', 'Visa required');
-        cy.contains('Checkout').click();
-        cy.wait(2000);
-        cy.contains('Place Order').click();
+        cy.get('.eds-text-bs').should('contain', 'Mastercard required')
+        cy.get('.eds-text-bs').should('contain', 'American Express required')
+        cy.get('.eds-text-bs').should('contain', 'Mastercard, Visa accepted')
+
+        // LLAMAR A CHECKOUT PARA QUE SELECCIONE EL TICKET DESEADO Y PROCEDA CON EL CHECKOUT. HACER DESDE CHECKOUT PAGE.
+        /* cy.contains('Checkout').click();
+         cy.wait(5000);
+        
+         cy.get('.eds-btn').click(); // Place order button
+         cy.get('.eds-show-up-mn > .eds-text-hs').should('contain', 'Thanks for your order!')*/
 
     })
 }

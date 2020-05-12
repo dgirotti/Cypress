@@ -6,6 +6,11 @@
         export const EVENT_TITLE_DATE = Cypress.moment().format('MMMM Do YYYY, h:mm:ss a');
         export const EVENT_TITLE = 'Cypress Automation Test '
         export const EVENT_NAME = EVENT_TITLE + EVENT_TITLE_DATE;
-       
+        export const VISA_CARD= '4111111111111111'
+        export const MASTER_CARD= '5555555555554444'
+        export const AMEX_CARD= '371449635398431'
+        export const CSC= '737'
+        export const EXPIRATION_DATE= '0922'
+        export const ZIP_CODE= '94234'
 
       
