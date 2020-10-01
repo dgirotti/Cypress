@@ -31,7 +31,7 @@ import {
 
 import { ticket_button_and_checkout } from "/Users/dgirotti/E2E_tests/cypress/page-objects/listing_page"
 
-import { checkout_modal,visa_credit_card_payment,credit_card_error } from "/Users/dgirotti/E2E_tests/cypress/page-objects/checkout_page"
+import { checkout_modal, visa_credit_card_payment, credit_card_error } from "/Users/dgirotti/E2E_tests/cypress/page-objects/checkout_page"
 
 
 describe('Create GA Event under Music Organization with a PC ticket ', () => {
@@ -51,7 +51,7 @@ describe('Create GA Event under Music Organization with a PC ticket ', () => {
         visa_master_payment_constraints()
         ticket_button_and_checkout()
         checkout_modal()
-        visa_credit_card_payment(VISA_CARD,CSC,EXPIRATION_DATE,ZIP_CODE)
+        visa_credit_card_payment(VISA_CARD, CSC, EXPIRATION_DATE, ZIP_CODE)
         credit_card_error()
 
     })

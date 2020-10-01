@@ -7,7 +7,7 @@ export function marketing_tool(){
     cy.location().then((location) => {
         const eventId = location.pathname.match(new RegExp('/events/(.*)/tickets'))[1];
         publish_event();
-        close_publish_popup();
+    
         //URL FOR ACCESING TO MARKETING TOOL
         cy.visit(`/myevent/${eventId}/?janus_fv=exp_eb_141015_marketing_tool=B`);
 

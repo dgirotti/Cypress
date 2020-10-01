@@ -7,6 +7,7 @@ export function publish_event(){
     cy.wait(10000);
     cy.contains('Publish Event').trigger('mouseover');
     cy.contains('Publish Now').click();
+    cy.wait(5000);
     
 }
 
