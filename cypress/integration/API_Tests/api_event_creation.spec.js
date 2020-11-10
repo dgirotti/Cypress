@@ -4,7 +4,6 @@
 
 describe('API Testing for Event Creation', () => {
 
-
     it('POST with body and not OAuth token. Should return a 401', () => {
 
         cy.request({
@@ -39,7 +38,7 @@ describe('API Testing for Event Creation', () => {
 
     })
 
-    it('POST with body and OAuth token.Should return a 200', () => {
+    it('POST with body and OAuth token. Should return a 200', () => {
 
         cy.request({
             method: 'POST',
@@ -100,7 +99,16 @@ describe('API Testing for Event Creation', () => {
 
     })
 
-    it('POST Publish and event. Should return a 200', () => {
+    it('POST Unpublish the event. Should return a 200', () => {
+
+        cy.request({
+            method: 'POST',
+            url: 'https://www.evbqaapi.com/v3/events/89362478579/unpublish/?token=LYS2XV5OUFEJQD5IVFO3',
+            failOnStatusCode: false
+        }).its('status').should('eq', 200)
+
+    })
+    it('POST Publish an event. Should return a 200', () => {
 
         cy.request({
             method: 'POST',
