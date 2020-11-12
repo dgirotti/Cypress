@@ -14,5 +14,7 @@
         export const CSC= '737'
         export const EXPIRATION_DATE= '0922'
         export const ZIP_CODE= '94234'
+        export const EBTOCKEN = 'LYS2XV5OUFEJQD5IVFO3'
+        export const ORGID = '308883604143'
 
       

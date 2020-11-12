@@ -1,16 +1,21 @@
 /// <reference types="cypress" />
 
+import{
+    EBTOCKEN,
+    ORGID
+}from "/Users/dgirotti/E2E_tests/cypress/evb-constants/constants";
+
 //const { expect } = require("chai")
 
 describe('API Testing for Event Creation', () => {
 
     Cypress.config('baseUrl', 'https://www.evbqaapi.com/v3')
 
-    it.only('POST - Create an evnet with body and not OAuth token. Should return a 401', () => {
+    it('POST - Create an event with body and not OAuth token. Should return a 401', () => {
 
         cy.request({
             method: 'POST',
-            url: '/organizations/308883604143/events/',
+            url: '/organizations/'+ORGID+'/events/',
             headers: {
                 "Content_type": "application/json"
             },
@@ -44,7 +49,7 @@ describe('API Testing for Event Creation', () => {
 
         cy.request({
             method: 'POST',
-            url: '/organizations/308883604143/events/?token=LYS2XV5OUFEJQD5IVFO3',
+            url: '/organizations/'+ORGID+'/events/?token='+ EBTOCKEN,
             headers: {
                 "Content_type": "application/json"
             },
@@ -78,7 +83,7 @@ describe('API Testing for Event Creation', () => {
     it('POST - Create a ticket. Should return a 200', () => {
         cy.request({
             method: 'POST',
-            url: '/events/89362478579/ticket_classes/?token=LYS2XV5OUFEJQD5IVFO3',
+            url: '/events/89362478579/ticket_classes/?token='+ EBTOCKEN,
             headers: {
                 "Content_type": "application/json"
             },
@@ -87,7 +92,7 @@ describe('API Testing for Event Creation', () => {
                 "ticket_class": {
                     "name": "Ticket From API",
                     "maximum_quantity": 0,
-                    "cost": "USD,10000",
+                    "cost": "USD,1000",
                     "quantity_total": 10,
                     "sales_start": "",
                     "sales_end": "",
@@ -105,7 +110,7 @@ describe('API Testing for Event Creation', () => {
 
         cy.request({
             method: 'POST',
-            url: '/events/89362478579/unpublish/?token=LYS2XV5OUFEJQD5IVFO3',
+            url: '/events/89362478579/unpublish/?token='+ EBTOCKEN,
             failOnStatusCode: false
         }).its('status').should('eq', 200)
 
@@ -114,7 +119,7 @@ describe('API Testing for Event Creation', () => {
 
         cy.request({
             method: 'POST',
-            url: '/events/89362478579/publish/?token=LYS2XV5OUFEJQD5IVFO3',
+            url: '/events/89362478579/publish/?token='+ EBTOCKEN,
             failOnStatusCode: false
         }).its('status').should('eq', 200)
 
@@ -124,7 +129,7 @@ describe('API Testing for Event Creation', () => {
 
         cy.request({
             method: 'POST',
-            url: '/events/89362478579/copy/?token=LYS2XV5OUFEJQD5IVFO3',
+            url: '/events/89362478579/copy/?token='+ EBTOCKEN,
             failOnStatusCode: false
         }).its('status').should('eq', 200)  
 
