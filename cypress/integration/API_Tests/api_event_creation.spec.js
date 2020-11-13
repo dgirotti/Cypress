@@ -43,7 +43,7 @@ describe('API Testing for Event Creation', () => {
 
     })
 
-    it('POST - Create an Publish an event. Then Unpublish it. Should return a 200', () => {
+    it('POST - Create and Publish an event. Then Unpublish it. Should return a 200', () => {
 
         cy.request({
             method: 'POST',
